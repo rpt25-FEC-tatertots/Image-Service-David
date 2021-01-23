@@ -1,18 +1,37 @@
 const express = require('express');
 // var bodyParser = require('body-parser');
+const db = require('../database/index.js');
 let app = express();
 
+
 // app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: false}))
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-app.post('/', function (req, res) {
+app.get('/images/mainImages/:productID', (req, res) => {
 
+  db.read(req.params.productID, 'mainImages')
+    .then(images=> {
+      res.send(images)
+    })
+    .catch(err =>console.log(err))
 })
 
-app.get('/', function (req, res) {
-// res.send('yay')
+app.get('/images/thumbnailImages/:productID', function (req, res) {
+  db.read(req.params.productID, 'thumbnailImages')
+  .then(images=> {
+    res.send(images)
+  })
+  .catch(err =>console.log(err))
+})
+
+app.get('/images/detailImages/:productID', function (req, res) {
+  db.read(req.params.productID, 'detailImages')
+  .then(images=> {
+    res.send(images)
+  })
+  .catch(err =>console.log(err))
 
 });
 
