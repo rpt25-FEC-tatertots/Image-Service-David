@@ -10,7 +10,8 @@ db.once('open', function() {
 
 const imageSchema = new mongoose.Schema({
   product_id: Number,
-  images: [String],
+  mainImages: [String],
+  thumbnailImages: [String],
   detailImages: [String]
 
 });

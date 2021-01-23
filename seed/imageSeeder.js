@@ -11,19 +11,38 @@ db.once('open', function() {
 });
 
 let imageArray = []
+
+let newObj = {};
+
 for(let i = 1; i < 101; i++) {
+  newObj = {}
+  newObj.product_id = i
+  newObj.mainImages = []
+  newObj.thumbnailImages = []
+  newObj.detailImages = []
+
+  for (let j = 1; j < 6; j++) {
+    newObj.mainImages.push(`https://rpt25.s3-us-west-1.amazonaws.com/main_images/${i}/${j}.jpg`)
+    newObj.thumbnailImages.push(`https://rpt25.s3-us-west-1.amazonaws.com/thumbnail_images/${i}/${j}.jpg`)
+    if (j === 1) {
+      newObj.detailImages.push(`https://rpt25.s3-us-west-1.amazonaws.com/detail_images/${i}/${j}.mp4`)
+    } else {
+      newObj.detailImages.push(`https://rpt25.s3-us-west-1.amazonaws.com/detail_images/${i}/${j}.jpg`)
+    }
+  }
 
   let newImage = new Images({
-    product_id: i,
-    image: [faker.image.imageUrl(100, 100), faker.image.imageUrl(100, 100), faker.image.imageUrl(100, 100), faker.image.imageUrl(100, 100), faker.image.imageUrl(100, 100)],
-    detailImages: [faker.image.imageUrl(100, 100), faker.image.imageUrl(100, 100), faker.image.imageUrl(100, 100), faker.image.imageUrl(100, 100), faker.image.imageUrl(100, 100)]
+    product_id: newObj.product_id,
+    mainImages: newObj.mainImages,
+    thumbnailImages:newObj.thumbnailImages,
+    detailImages: newObj.detailImages,
   })
 
   imageArray.push(newImage);
 
 }
 
-function exit() {
+let exit = () => {
   mongoose.disconnect();
   console.log('MONGOOSE DISCONNECT!')
 }
@@ -34,6 +53,5 @@ Images.insertMany(imageArray, (err, docs) => {
   } else {
     console.log(docs + "images saved")
     exit()
-    // mongoose.disconnect()
   }
 })
