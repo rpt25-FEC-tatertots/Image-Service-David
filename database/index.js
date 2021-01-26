@@ -18,9 +18,8 @@ const imageSchema = new mongoose.Schema({
 
 let Images = mongoose.model('Images', imageSchema)
 
-let read = (callback) => {
-  Images.find({}).exec((err,result) => callback.send(result));
-
+let read = (productID, imageType) => {
+  return Images.findOne({product_id: productID}, imageType).exec()
 }
 
 module.exports = mongoose.model('Images', imageSchema);
