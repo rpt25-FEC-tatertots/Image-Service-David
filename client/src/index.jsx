@@ -4,23 +4,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      images: []
     }
   }
 
 componentDidMount() {
   axios.get('/images/mainImages/3')
-    .then(response => console.log(response))
-    .catch( (error) => {
-      console.log(error)
+    .then(response => {
+      console.log(response.data.mainImages)
+      this.setState({images: response.data.mainImages}, ()=> {console.log(this.state.images)})
     })
-  axios.get('/images/detailImages/3')
-    .then(response => console.log(response))
-    .catch( (error) => {
-      console.log(error)
-    })
-  axios.get('/images/thumbnailImages/3')
-    .then(response => console.log(response))
     .catch( (error) => {
       console.log(error)
     })
