@@ -11,10 +11,19 @@ class App extends React.Component {
 componentDidMount() {
   axios.get('/images/mainImages/3')
     .then(response => console.log(response))
+    .catch( (error) => {
+      console.log(error)
+    })
   axios.get('/images/detailImages/3')
     .then(response => console.log(response))
-    axios.get('/images/thumbnailImages/3')
+    .catch( (error) => {
+      console.log(error)
+    })
+  axios.get('/images/thumbnailImages/3')
     .then(response => console.log(response))
+    .catch( (error) => {
+      console.log(error)
+    })
 }
 
 
