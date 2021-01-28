@@ -31,10 +31,17 @@ app.get('/images/detailImages/:productID', function (req, res) {
   .then(images=> {
     res.send(images)
   })
-  .catch(err =>console.log(err))
+  .catch(err => console.log(err))
 
 });
 
-app.listen(6003, () => {
-  console.log('listening on port 6003!');
+app.get('/user', function (req, res) {
+  res.send('hello!')
+
 });
+
+module.exports = app;
+
+// app.listen(6003, () => {
+//   console.log('listening on port 6003!');
+// });
