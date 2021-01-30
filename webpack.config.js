@@ -3,6 +3,10 @@ const path = require('path');
 module.exports = {
   entry: path.resolve(__dirname, './client/src/index.jsx'),
   mode: "development",
+  externals: {
+    'react': 'React',
+    'react-dom': 'ReactDOM'
+  },
   module: {
     rules: [
       {
@@ -18,7 +22,7 @@ module.exports = {
     ]
   },
    output: {
-    filename: 'bundle.js',
+    filename: 'ImageService.js',
     path: path.resolve(__dirname, './client/dist')
   }
 };
