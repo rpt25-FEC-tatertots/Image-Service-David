@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {ChevronRight, ChevronLeft} from '@styled-icons/boxicons-regular/'
+import {ChevronRightCircle, ChevronLeftCircle} from '@styled-icons/boxicons-solid/'
 
 const Slider = styled.section`
   position: relative;
@@ -14,25 +14,33 @@ const Picture = styled.img`
   border-radius:10px;
 `
 
-const RightArrow = styled(ChevronRight) `
+const RightArrow = styled.button `
+border-radius:50%;
+background-color:white;
 position: absolute;
-height:10%;
-width: 10%;
-  right: 32px;
-  font-size: 10px;
-  color: #000;
-  z-index:100;
-  cursor:pointer;
-  user-select: none;
-  `
+height:50px;
+width: 50px;
+outline:none;
+border: none;
+font-weight: bold;
+right: 32px;
+font-size: 25px;
+z-index:100;
+cursor:pointer;
+user-select: none;
+`
 
-const LeftArrow = styled(ChevronLeft) `
-position: absolute;
-height:10%;
-width: 10%;
+const LeftArrow = styled.button `
+  border-radius:50%;
+  background-color:white;
+  position: absolute;
+  height:50px;
+  width: 50px;
+  outline:none;
+  border: none;
+  font-weight: bold;
   left: 32px;
-  font-size: 10px;
-  color: #000;
+  font-size: 25px;
   z-index:100;
   cursor:pointer;
   user-select: none;
