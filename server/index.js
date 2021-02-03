@@ -7,7 +7,7 @@ let app = express();
 // app.use(bodyParser.json());
 app.use(express.urlencoded({extended: false}))
 
-app.use(express.static(__dirname + '/../client/dist'));
+app.use( '/:product_id', express.static(__dirname + '/../client/dist'));
 
 app.get('/images/mainImages/:productID', (req, res) => {
 
