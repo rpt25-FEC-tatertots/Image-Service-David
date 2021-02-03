@@ -15,7 +15,7 @@ app.get('/images/mainImages/:productID', (req, res) => {
     .then(images=> {
       res.send(images)
     })
-    .catch(err =>console.log(err))
+    .catch(err =>res.status(404))
 })
 
 app.get('/images/thumbnailImages/:productID', function (req, res) {
@@ -23,7 +23,7 @@ app.get('/images/thumbnailImages/:productID', function (req, res) {
   .then(images=> {
     res.send(images)
   })
-  .catch(err =>console.log(err))
+  .catch(err =>res.status(404))
 })
 
 app.get('/images/detailImages/:productID', function (req, res) {
@@ -31,14 +31,10 @@ app.get('/images/detailImages/:productID', function (req, res) {
   .then(images=> {
     res.send(images)
   })
-  .catch(err => console.log(err))
+  .catch(err => res.status(404))
 
 });
 
-app.get('/user', function (req, res) {
-  res.send('hello!')
-
-});
 
 module.exports = app;
 

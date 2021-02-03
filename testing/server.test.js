@@ -22,12 +22,6 @@ describe('insert', () => {
 
 });
 
-describe('Sample Test', () => {
-  it('should test that true === true', () => {
-    expect(true).toBe(true)
-  })
-})
-
 
 describe('GET Endpoints', () => {
   it('should GET main images', async (done) => {
