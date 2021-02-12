@@ -11,10 +11,9 @@ class App extends React.Component {
   }
 
 componentDidMount() {
-  axios.get('/images/mainImages/3')
+  axios.get(`/images/mainImages${window.location.pathname}`)
     .then(response => {
-      console.log(response.data.mainImages)
-      this.setState({mainImages: response.data.mainImages}, ()=> {console.log(this.state.mainImages)})
+      this.setState({mainImages: response.data.mainImages})
     })
     .catch( (error) => {
       console.log(error)
@@ -25,10 +24,7 @@ componentDidMount() {
 render() {
   return (
     <div>
-      <div>Image Service Tater Tots</div>
       <ImageList data={this.state.mainImages}/>
-
-
     </div>
     )
 }
