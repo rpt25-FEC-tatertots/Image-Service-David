@@ -56,12 +56,13 @@ background-color: white;
 
 const ImageList = ({data, active, slideNext, slidePrev}) => {
 
-  const prev = active === 0 ? data.length - 1 : active - 1;
-  const next = active === data.length - 1 ? 0 : active + 1;
+  const prev = active === 0 ? data.length - 1 : (active - 1);
+  const next = active === data.length - 1 ? 0 : (active + 1);
   return (
     <ImageWrapper>
       <PrevArrow onClick={() => slidePrev()}>&lt;</PrevArrow>
       <ImageSlider>
+        {console.log('next ', next)}
         <Image src={data[prev]} alt="image" />
         <Image src={data[active]} alt="image" />
         <Image src={data[next]} alt="image" />

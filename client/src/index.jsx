@@ -30,7 +30,7 @@ slidePrev() {
 }
 componentDidMount() {
   window.addEventListener('hashchange', () => {
-    let activeImageIndex = window.location.hash.split("&")[1].split("=")[1]
+    let activeImageIndex = parseInt(window.location.hash.split("&")[1].split("=")[1])
     this.setState({ activeImageIndex })
   })
   axios.get(`/images/mainImages${window.location.pathname}`)
