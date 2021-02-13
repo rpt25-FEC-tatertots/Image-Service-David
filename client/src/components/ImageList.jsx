@@ -1,25 +1,26 @@
 import React from 'react'
-import styled from 'styled-components'
+//import styled from 'styled-components'
 
-const ImageWrapper = styled.div`
+const ImageWrapper = window.styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
 `;
-const ImageSlider = styled.div`
+const ImageSlider = window.styled.div`
 width: 100%;
 display: flex;
 justify-content: center;
 align-items: center;
 overflow: hidden;
 `;
-const Image = styled.img`
-width: 66%;
+const Image = window.styled.img`
+
+width: 55%;
 @media (max-width: 767px) {
   width: 100%
 }
 `;
-const NextArrow = styled.div`
+const NextArrow = window.styled.div`
 position: absolute;
 display: flex;
 justify-content: center;
@@ -36,7 +37,7 @@ background-color: white;
   display: none;
 }
 `;
-const PrevArrow = styled.div`
+const PrevArrow = window.styled.div`
 position: absolute;
 display: flex;
 justify-content: center;
@@ -62,7 +63,6 @@ const ImageList = ({data, active, slideNext, slidePrev}) => {
     <ImageWrapper>
       <PrevArrow onClick={() => slidePrev()}>&lt;</PrevArrow>
       <ImageSlider>
-        {console.log('next ', next)}
         <Image src={data[prev]} alt="image" />
         <Image src={data[active]} alt="image" />
         <Image src={data[next]} alt="image" />
