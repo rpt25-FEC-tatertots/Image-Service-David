@@ -6,29 +6,55 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mainImages: []
+      mainImages: [],
+      activeImageIndex: 0
     }
+    this.slideNext = this.slideNext.bind(this);
+    this.slidePrev = this.slidePrev.bind(this);
   }
-
+slideNext() {
+  const { activeImageIndex, mainImages } = this.state;
+  if (activeImageIndex === mainImages.length - 1) {
+    this.setState({ activeImageIndex: 0 });
+  } else {
+    this.setState({ activeImageIndex: activeImageIndex + 1 })
+  }
+}
+slidePrev() {
+  const { activeImageIndex, mainImages } = this.state;
+  if (activeImageIndex === 0) {
+    this.setState({ activeImageIndex: mainImages.length - 1 });
+  } else {
+    this.setState({ activeImageIndex: activeImageIndex - 1 });
+  }
+}
 componentDidMount() {
-  axios.get('/images/mainImages/3')
+  window.addEventListener('hashchange', () => {
+    let activeImageIndex = parseInt(window.location.hash.split("&")[1].split("=")[1])
+    this.setState({ activeImageIndex })
+  })
+  axios.get(`/images/mainImages${window.location.pathname}`)
     .then(response => {
-      console.log(response.data.mainImages)
-      this.setState({mainImages: response.data.mainImages}, ()=> {console.log(this.state.mainImages)})
+      this.setState({mainImages: response.data.mainImages})
     })
     .catch( (error) => {
       console.log(error)
     })
+}
+componentWillUnmount() {
+  window.removeEventListener('hashchange')
 }
 
 
 render() {
   return (
     <div>
-      <div>Image Service Tater Tots</div>
-      <ImageList data={this.state.mainImages}/>
-
-
+      <ImageList
+      data={this.state.mainImages}
+      active={this.state.activeImageIndex}
+      slidePrev={this.slidePrev}
+      slideNext={this.slideNext}
+      />
     </div>
     )
 }

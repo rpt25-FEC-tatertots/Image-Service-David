@@ -1,12 +1,13 @@
 const express = require('express');
 // var bodyParser = require('body-parser');
 const db = require('../database/index.js');
+const cors = require('cors')
 let app = express();
 
 
 // app.use(bodyParser.json());
 app.use(express.urlencoded({extended: false}))
-
+app.use(cors())
 app.use( '/:product_id', express.static(__dirname + '/../client/dist'));
 
 app.get('/images/mainImages/:productID', (req, res) => {
