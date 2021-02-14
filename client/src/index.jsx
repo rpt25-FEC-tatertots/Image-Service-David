@@ -1,5 +1,5 @@
 const axios = require('axios')
-import ImageList from './components/Imagelist.jsx'
+import ImageList from './components/ImageList.jsx'
 
 
 class App extends React.Component {
