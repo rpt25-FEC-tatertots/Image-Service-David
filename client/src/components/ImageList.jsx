@@ -1,78 +1,75 @@
-import React, {useState, useEffect, useRef} from 'react'
-import Image from './Image.jsx'
-import styled from 'styled-components'
-import {LeftArrow, RightArrow, Pictures, Slider} from './styled.js'
+import React from 'react'
+//import styled from 'styled-components'
 
+const ImageWrapper = window.styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+`;
+const ImageSlider = window.styled.div`
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+`;
+const Image = window.styled.img`
 
-const ImageList = (props) => {
-const [pic, setPic] = useState(-50)
-const length = props.data.length;
-const [slide, setSlide] = useState(true)
-const [prev, setPrev] = useState(0);
-
-// const usePrevious = (value) => {
-//   const ref = useRef();
-
-//   useEffect(() => {
-//     ref.current = value;
-//   });
-
-//   return ref.current;
-// }
-
-// const previous = usePrevious(pic);
-
-// useEffect(() => {
-//   console.log('useEFFECT', pic)
-
-//   if(pic === 0) {
-//     setSlide(false)
-//   } else {
-//     setSlide(true)
-//   }
-// });
-
-const nextSlide = () => {
-  pic === ((length * -100) -50)? setPic(-50) : setPic(pic => pic-100);
-
+width: 55%;
+@media (max-width: 767px) {
+  width: 100%
 }
-
-const prevSlide = () => {
-  pic === 50 ? setPic((-100 * (length)) -50) : setPic(pic => pic + 100)
-
-
+`;
+const NextArrow = window.styled.div`
+position: absolute;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 2em;
+right: 4rem;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+font-style: bold;
+color: black;
+background-color: white;
+@media (max-width: 767px) {
+  display: none;
 }
-
-  return(
-    <div className='slider'>
-
-      <LeftArrow onClick={prevSlide}>&lt;</LeftArrow>
-      <RightArrow id='next' onClick={nextSlide}>&gt;</RightArrow>
-
-      <div key={-1} className={pic === -50 ? null: 'slide'} style={{transform: `translateX(${pic}%)`}}>
-        <img src={props.data[length-1]} className='image'/>
-      </div>
-
-      {props.data.map((image, id) => {
-        return (
-          <div className={pic === -50 ? null: 'slide'} key={id+100} style={{transform: `translateX(${pic}%)`}}>
-
-            <Image image={image} key={id+1}/>
-
-          </div>
-
-        )
-      })}
-
-      <div key={props.data.length} className={pic === -50 ? null: 'slide'} style={{transform: `translateX(${pic}%)`}}>
-        <img src={props.data[0]} key={props.data.length+2}className='image'/>
-
-      </div>
-
-    </div>
-  );
+`;
+const PrevArrow = window.styled.div`
+position: absolute;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 2em;
+left: 4rem;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+font-style: bold;
+color: black;
+background-color: white;
+@media (max-width: 767px) {
+  display: none;
 }
+`;
 
+const ImageList = ({data, active, slideNext, slidePrev}) => {
 
+  const prev = active === 0 ? data.length - 1 : (active - 1);
+  const next = active === data.length - 1 ? 0 : (active + 1);
+  return (
+    <ImageWrapper>
+      <PrevArrow onClick={() => slidePrev()}>&lt;</PrevArrow>
+      <ImageSlider>
+        <Image src={data[prev]} alt="image" />
+        <Image src={data[active]} alt="image" />
+        <Image src={data[next]} alt="image" />
+      </ImageSlider>
+      <NextArrow onClick={() => slideNext()}>&gt;</NextArrow>
+    </ImageWrapper>
+  )
+}
 
 export default ImageList;
