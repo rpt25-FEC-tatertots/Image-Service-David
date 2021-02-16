@@ -22,6 +22,7 @@ width: 55%;
 `;
 const NextArrow = window.styled.div`
 position: absolute;
+cursor: pointer;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -39,6 +40,7 @@ background-color: white;
 `;
 const PrevArrow = window.styled.div`
 position: absolute;
+cursor: pointer;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -61,13 +63,13 @@ const ImageList = ({data, active, slideNext, slidePrev}) => {
   const next = active === data.length - 1 ? 0 : (active + 1);
   return (
     <ImageWrapper>
-      <PrevArrow onClick={() => slidePrev()}>&lt;</PrevArrow>
+      <PrevArrow onClick={() => slidePrev()} className="material-icons">keyboard_arrow_left</PrevArrow>
       <ImageSlider>
         <Image src={data[prev]} alt="image" />
         <Image src={data[active]} alt="image" />
         <Image src={data[next]} alt="image" />
       </ImageSlider>
-      <NextArrow onClick={() => slideNext()}>&gt;</NextArrow>
+      <NextArrow onClick={() => slideNext()} className="material-icons">keyboard_arrow_right</NextArrow>
     </ImageWrapper>
   )
 }
